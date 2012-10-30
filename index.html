@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <title>GET RSS - Javascript rss reader</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href='http://api.mobilis.co.kr/webfonts/css/?fontface=NanumGothicWeb' rel='stylesheet' type='text/css' />
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">GET RSS</a>
+          <div class="btn-group pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user"></i> 07110072 한승호
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">컴퓨터공학과</a></li>
+              <li class="divider"></li>
+              <li><a href="http://facebook.com/pengun">FACEBOOK</a></li>
+              <li><a href="http://twitter.com/shilpe0304">TWITTER</a></li>
+              <li><a href="mailto:penguns@naver.com">EMAIL</a></li>                            
+            </ul>
+          </div>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Reader</a></li>
+
+                          
+			<li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Source <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="view-source:index.html">index.html</a></li>
+                <li><a href="css/style.css">style.css</a></li>
+                <li class="divider"></li>
+                <li class="nav-header">XML Parsing</li>
+                <li><a href="js/rss-parser.js">rss-parser.js</a></li>
+                <li><a href="js/jquery.zrssfeed.hansh.js">jquery.zrssfeed.hansh.js</a></li>
+              </ul>
+            </li>              
+
+              <li><a data-toggle="modal" href="#Report">Report</a></li>           
+              <li><a data-toggle="modal" href="#Reference"></i> Reference</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav" id="menu">
+            <ul class="nav nav-list" data-toggle="buttons-radio">
+              <li class="nav-header">LIST1 (Only Javascript)</li>
+              <li class="btn_t active"><a onclick="ReadRSS('xml/cnn_tech_rss.xml','rssBodyTemplate','rssTitleTemplate');" href="#">CNN.com - Technology</a></li>
+              <li class="btn_t"><a onclick="ReadRSS('xml/tu.xml','rssBodyTemplate','rssTitleTemplate');" href="#">뉴스와이어 : 동명대학교</a></li>              
+              <li class="btn_t nav-header">LIST2 (zrssfeed + Google API)</li>
+              <li class="btn_t"><a onclick="setRSSFeed('http://news.google.co.kr/news?hl=ko&gl=kr&q=%EB%8F%99%EB%AA%85%EB%8C%80%ED%95%99%EA%B5%90&um=1&ie=UTF-8&output=rss')" href="#">구글뉴스 : 동명대학교</a></li>                
+              <li class="btn_t"><a onclick="setRSSFeed('http://feeds.bbc.co.uk/iplayer/highlights/tv/list')" href="#">BBC iPlayer - TV Highlights</a></li>
+              <li class="btn_t"><a onclick="setRSSFeed('http://rss1.smashingmagazine.com/feed')" href="#">Smashing Magazine</a></li>
+              <li class="btn_t"><a onclick="setRSSFeed('http://old.ddanzi.com/appstream/ddradio.xml')" href="#">나는 꼼수다 MP3</a></li>
+              <li class="btn_t"><a onclick="setRSSFeed('http://info-graphics.kr/?feed=rss2&cat=5')" href="#">인포그래픽스.kr - IT/SNS</a></li>
+              <li class="btn_t"><a onclick="setRSSFeed('http://blogs.msdn.com/b/b8_ko/rss.aspx')" href="#">Windows 8 - MSDN Blogs</a></li>              
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        
+        <div class="span9" id="rssBodyTemplate">
+       
+
+        
+          <div class="hero-unit" id="rssTitleTemplate">      
+		  <h1>Get RSS</H1>
+		  <p>JavaScript RSS reader</p>
+          <!--
+            <h1>(::Title::)</h1>
+            <p>(::Description::)</p>
+            <p><a class="btn btn-primary btn-large" href="(::Link::)">웹사이트 이동 &raquo;</a></p>
+          -->
+          </div>
+          
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>웹컴퓨팅서비스 기말 과제, 071110072 한승호, 2012</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+    <div class="modal hide" id="Report">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>웹컴퓨팅시스템 기말과제</h3>
+      </div>
+      <div class="modal-body">
+        <p>07110072 한승호</p>
+		<p>컴퓨터공학과</p>
+        <p><a href="ready.pdf">기획서.pdf</a></p>
+        <p><a href="final.pdf">최종 보고서.pdf</a></p>
+
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">닫음</a>
+      </div>
+    </div>
+	
+    <div class="modal hide" id="Reference">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>Reference - 참고한 소스</h3>
+      </div>
+      <div class="modal-body">
+        <p>bootstreap<br><a href="http://twitter.github.com/bootstrap/">http://twitter.github.com/bootstrap/</a></p>
+        <p>jQuery<br><a href="http://jquery.com">http://jquery.com</a></p>
+        <p>jQuery Zrssfeed Plug-in<br><a href="http://www.zazar.net/developers/jquery/zrssfeed/">http://www.zazar.net/developers/jquery/zrssfeed/</a></p>		
+        <p>Google feed API<br><a href="https://developers.google.com/feed/">https://developers.google.com/feed/</a></p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">닫음</a>
+      </div>
+    </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap-transition.js"></script>
+    <script src="js/bootstrap-alert.js"></script>
+    <script src="js/bootstrap-modal.js"></script>
+    <script src="js/bootstrap-dropdown.js"></script>
+    <script src="js/bootstrap-scrollspy.js"></script>
+    <script src="js/bootstrap-tab.js"></script>
+    <script src="js/bootstrap-tooltip.js"></script>
+    <script src="js/bootstrap-popover.js"></script>
+    <script src="js/bootstrap-button.hansh.js"></script>
+    <script src="js/bootstrap-collapse.js"></script>
+    <script src="js/bootstrap-carousel.js"></script>
+    <script src="js/bootstrap-typeahead.js"></script>
+ 
+ 
+	<script language="javascript" src="js/rss-parser.js"></script>
+    
+    <script type="javascript" src="https://www.google.com/jsapi"></script>
+	<script language="javascript" src="js/jquery.zrssfeed.hansh.js"></script>   
+           
+	<script type="text/javascript">
+		$('#Reference').modal('hide');
+		$('#Report').modal('hide');		
+		$('.nav').button();
+		function setRSSFeed(url) {
+		 $('#rssBodyTemplate').rssfeed(url);
+		}
+    </script>
+
+  </body>
+</html>

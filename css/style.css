@@ -1,0 +1,34 @@
+body{
+	font-family: 'NanumGothicWeb';
+}
+
+.hero-unit{
+	padding:20px;
+}
+
+.hero-unit p{
+	
+	text-align:right;
+}
+
+.date {
+	font-size:10px;
+	color:#666666;
+	font-family: 'NanumGothicWeb';
+}
+
+.hero-unit h1{
+	font-size:4em;
+	font-family: 'NanumGothicWeb';
+	font-weight:normal;
+	padding-bottom:10px;
+}
+
+#rssBodyTemplate h3{
+	font-size:1.3em;
+	line-height:1.5em;
+}
+
+#rssBodyTemplate .row-fluid{
+	padding-bottom:10px;
+}
